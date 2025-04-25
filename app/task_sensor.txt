@@ -1,0 +1,24 @@
+  task_sensor.c (task_sensor.h, task_sensor_attribute.h) 
+   Non-Blocking & Update By Time Code -> Sensor Modeling
+  
+...
+
+task_sensor_attribute.h contiene:
+	la enumeración de eventos y estados del statechart
+	la enumeración de identificadores de sensores
+	la declaración de los tipos estructuras de configuración (cfg) y datos (dta) de sensores
+task_sensor.c contiene:
+	la definición de dos arrays de estructuras de sensores, uno de configuración (cfg) y otro de datos (dta) (p/1 sensor)
+	el método task_sensor_init(), inicializa statechart de sensores, donde:
+	se inicializa la estructura de datos (dta) de sensores (p/1 sensor)
+	el método task_sensor_update(), ejecuta el statechart de sensores, donde:
+	hay un switch con tantos case´s como estados tiene el statechart, donde:
+	c/case tiene tantos if , como transiciones salientes c/eventos [guardas] tiene ese estado, donde:
+	en el cuerpo del if se puede:
+	pasar al statechart siguiente (System) un signal (evento) invocando put_evet_task_...
+	modificar la variable de estado del statechart
+	modificar el tick del statechart
+	
+	-> Se observa como en el archivo task_sensor.c, se codifican los casos donde se reciben eventos de
+	up o down sin considerar el rebote, es decir cambiando directamente el estado, sin esperar un
+	tiempo o pasando por un estado intermedio.
