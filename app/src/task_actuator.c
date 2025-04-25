@@ -60,13 +60,21 @@
 
 /********************** internal data declaration ****************************/
 const task_actuator_cfg_t task_actuator_cfg_list[] = {
-	{ID_LED_A,  LED_A_PORT,  LED_A_PIN, LED_A_ON,  LED_A_OFF,
+	//{ID_LED_A,  LED_A_PORT,  LED_A_PIN, LED_A_ON,  LED_A_OFF,
+	//DEL_LED_XX_BLI, DEL_LED_XX_PUL},
+	{ID_LED_BARRIER_UP,  LED_BARRIER_UP_PORT,  LED_BARRIER_UP_PIN, LED_XX_ON,  LED_XX_OFF,
+	 DEL_LED_XX_BLI, DEL_LED_XX_PUL},
+	{ID_LED_BARRIER_DOWN,  LED_A_PORT,  LED_A_PIN, LED_XX_ON,  LED_XX_OFF,
+	 DEL_LED_XX_BLI, DEL_LED_XX_PUL},
+	{ID_LED_PRINTING,  LED_A_PORT,  LED_A_PIN, LED_XX_ON,  LED_XX_OFF,
 	 DEL_LED_XX_BLI, DEL_LED_XX_PUL}
 };
 
 #define ACTUATOR_CFG_QTY	(sizeof(task_actuator_cfg_list)/sizeof(task_actuator_cfg_t))
 
 task_actuator_dta_t task_actuator_dta_list[] = {
+	{DEL_LED_XX_MIN, ST_LED_XX_OFF, EV_LED_XX_NOT_BLINK, false},
+	{DEL_LED_XX_MIN, ST_LED_XX_OFF, EV_LED_XX_NOT_BLINK, false},
 	{DEL_LED_XX_MIN, ST_LED_XX_OFF, EV_LED_XX_NOT_BLINK, false}
 };
 
@@ -189,17 +197,6 @@ void task_actuator_update(void *parameters)
 
 					break;
 
-				case ST_LED_XX_BLINK_ON:
-
-					break;
-
-				case ST_LED_XX_BLINK_OFF:
-
-					break;
-
-				case ST_LED_XX_PULSE:
-
-					break;
 
 				default:
 

@@ -161,7 +161,6 @@ void task_system_update(void *parameters)
 				if ((true == p_task_system_dta->flag) && (EV_SYS_LOOP_DETECTOR_ON == p_task_system_dta->event))
 				{
 					p_task_system_dta->flag = false;
-					put_event_task_actuator(EV_LED_XX_ON, ID_LED_A);
 					p_task_system_dta->state = ST_SYS_CAR_PRESENT;
 				}
 
@@ -172,13 +171,12 @@ void task_system_update(void *parameters)
 				if ((true == p_task_system_dta->flag) && (EV_SYS_LOOP_DETECTOR_OFF == p_task_system_dta->event))
 				{
 					p_task_system_dta->flag = false;
-					put_event_task_actuator(EV_LED_XX_OFF, ID_LED_A);
 					p_task_system_dta->state = ST_SYS_WAITING;
 				}
 				else if ((true == p_task_system_dta->flag) && (EV_SYS_ENTRY_REQUEST == p_task_system_dta->event))
 				{
 					p_task_system_dta->flag = false;
-					put_event_task_actuator(EV_LED_XX_OFF, ID_LED_A);
+					put_event_task_actuator(EV_LED_XX_ON, ID_LED_PRINTING);
 					p_task_system_dta->state = ST_SYS_PRINTING;
 					p_task_system_dta->tick = DEL_SYS_PRINT;
 				}
@@ -191,11 +189,11 @@ void task_system_update(void *parameters)
 				{
 					p_task_system_dta->tick--;
 				}
-
 				else
 				{
 					p_task_system_dta->flag = false;
-					put_event_task_actuator(EV_LED_XX_OFF, ID_LED_A);
+					put_event_task_actuator(EV_LED_XX_OFF, ID_LED_PRINTING);
+					put_event_task_actuator(EV_LED_XX_ON, ID_LED_BARRIER_UP);
 					p_task_system_dta->state = ST_SYS_BARRIER_RISING;
 				}
 
@@ -206,7 +204,7 @@ void task_system_update(void *parameters)
 				if ((true == p_task_system_dta->flag) && (EV_SYS_BARRIER_UP == p_task_system_dta->event))
 				{
 					p_task_system_dta->flag = false;
-					put_event_task_actuator(EV_LED_XX_OFF, ID_LED_A);
+					put_event_task_actuator(EV_LED_XX_OFF, ID_LED_BARRIER_UP);
 					p_task_system_dta->state = ST_SYS_BARRIER_UP;
 					p_task_system_dta->tick = DEL_SYS_WAIT;
 				}
@@ -218,19 +216,16 @@ void task_system_update(void *parameters)
 				if ((true == p_task_system_dta->flag) && (EV_SYS_INFRARED_ON == p_task_system_dta->event))
 				{
 					p_task_system_dta->flag = false;
-					put_event_task_actuator(EV_LED_XX_OFF, ID_LED_A);
 					p_task_system_dta->state = ST_SYS_CAR_PASSING;
 				}
-
 			    else if (p_task_system_dta->tick > 0)
 				{
 					p_task_system_dta->tick--;
 				}
-
 				else
 				{
 					p_task_system_dta->flag = false;
-					put_event_task_actuator(EV_LED_XX_OFF, ID_LED_A);
+					put_event_task_actuator(EV_LED_XX_ON, ID_LED_BARRIER_DOWN);
 					p_task_system_dta->state = ST_SYS_BARRIER_FALLING;
 				}
 
@@ -241,7 +236,7 @@ void task_system_update(void *parameters)
 				if ((true == p_task_system_dta->flag) && (EV_SYS_INFRARED_OFF == p_task_system_dta->event))
 				{
 					p_task_system_dta->flag = false;
-					put_event_task_actuator(EV_LED_XX_OFF, ID_LED_A);
+					put_event_task_actuator(EV_LED_XX_ON, ID_LED_BARRIER_DOWN);
 					p_task_system_dta->state = ST_SYS_BARRIER_FALLING;
 				}
 
@@ -252,7 +247,7 @@ void task_system_update(void *parameters)
 				if ((true == p_task_system_dta->flag) && (EV_SYS_BARRIER_DOWN == p_task_system_dta->event))
 				{
 					p_task_system_dta->flag = false;
-					put_event_task_actuator(EV_LED_XX_OFF, ID_LED_A);
+					put_event_task_actuator(EV_LED_XX_OFF, ID_LED_BARRIER_DOWN);
 					p_task_system_dta->state = ST_SYS_WAITING;
 				}
 
